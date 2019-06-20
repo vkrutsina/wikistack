@@ -1,0 +1,27 @@
+{
+  "name": "wikistack",
+  "version": "1.0.0",
+  "description": "echo # wikistack # wikistack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon /Users/BryanGottschalk/Desktop/Fullstack_Junior/wikistack/public/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryangottschalk/wikistack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bryangottschalk/wikistack/issues"
+  },
+  "homepage": "https://github.com/bryangottschalk/wikistack#readme",
+  "dependencies": {
+    "html-template-tag": "^3.1.0",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
