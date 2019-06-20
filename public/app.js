@@ -1,31 +1,31 @@
-var morgan = require('morgan');
-const html = require('../views/layout');
-const express = require('express');
-const router = express.Router();
+var morgan = require("morgan");
+
+const express = require("express");
+
 const app = express();
-router.use(express.urlencoded({ extended: false }));
-const { db } = require('./models');
-const wiki = require('./routes/wiki');
-const user = require('./routes/user');
-
+app.use(express.urlencoded({ extended: false }));
+const { db } = require("./models");
 db.authenticate().then(() => {
-  console.log('connected to the database');
+  console.log("connected to the database");
 });
+const wiki = require("./routes/wiki");
+const user = require("./routes/user");
 
-app.use('/wiki', wiki);
-app.use('/user', user);
+app.use(morgan("dev"));
+app.use(express.json());
+app.use("/wiki", wiki);
+app.use("/user", user);
 
-app.get('/', (req, res, next) => {
-  res.send(html(''));
+app.get("/", (req, res) => {
+  res.redirect("/wiki");
 });
-
 const PORT = 3000;
 
 async function connect() {
   try {
     await db.sync({ force: true });
     //where do stuff
-    await db.close();
+    // await db.close();
   } catch (err) {
     console.error(err);
   }

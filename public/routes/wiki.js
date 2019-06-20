@@ -1,16 +1,36 @@
-const express = require('express');
+const express = require("express");
+const html = require("../../views/layout");
 const router = express.Router();
-const addPage = require('../../views/addPage');
+const { Page } = require("../models");
+const { addPage } = require("../../views");
 module.exports = router;
 
-router.get('/', (req, res) => {
-  res.send('got the GET /wiki/');
+router.get("/", (req, res, next) => {
+  res.send(html(""));
 });
-
-router.post('/', (req, res) => {
-  res.send('got to POST /wiki/');
-});
-
-router.get('/add', (req, res) => {
+router.get("/add", (req, res) => {
   res.send(addPage());
 });
+
+router.post("/", async (req, res, next) => {
+  // STUDENT ASSIGNMENT:
+  // add definitions for `title` and `content`
+
+  const page = new Page({
+    title: req.body.title,
+    content: req.body.content
+  });
+
+  // make sure we only redirect *after* our save is complete!
+  // note: `.save` returns a promise.
+  try {
+    await page.save();
+    res.redirect("/");
+  } catch (error) {
+    next(error);
+  }
+});
+
+// router.post("/add", (req, res) => {
+//   res.json(req.body);
+// });
